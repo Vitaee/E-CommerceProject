@@ -1,0 +1,15 @@
+.idea/
+.vscode/
+*.pyc
+__pycache__/ 
+media/
+node_modules/
+staticfiles/
+.DS_Store
+.virtualenv
+venv
+.env
+.pytest_cache
+logs
+volumes
+ecommerce-env
