@@ -3,7 +3,7 @@ This project developped according to lecture (ECC431 E-Commerce) requirements. A
 
 ## Diagrams for E-Commerce Project
 
-![Diagram](conceptdiagram.png)
+![Diagram](./conceptdiagram.png)
 
 ## Pages (Will be developped)
 
@@ -15,7 +15,7 @@ This project developped according to lecture (ECC431 E-Commerce) requirements. A
 
 ## Run the project
 
-- virtualenv ecommerce-env
+- poetry shell
 - poetry install ( i assume u have installed poetry )
 - python manage.py
 
