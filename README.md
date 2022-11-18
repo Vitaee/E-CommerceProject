@@ -2,8 +2,9 @@
 This project developped according to lecture (ECC431 E-Commerce) requirements. A technical elective lecture given by [MSc. Buğra Demircioğlu](https://ziraat.neu.edu.tr/akademik-personel/bugra-demircioglu/).
 
 ## Diagrams for E-Commerce Project
+This is the concept diagram if we want to move the project to AWS.
 
-![Diagram](./conceptdiagram.png)
+![Diagram](./conceptdiagram.svg)
 
 ## Pages (Will be developped)
 
@@ -13,13 +14,13 @@ This project developped according to lecture (ECC431 E-Commerce) requirements. A
 - Basket: purchased products. 
 
 
-## Run the project
+## Run the project (Will be updated while development)
 
 - poetry shell
 - poetry install ( i assume u have installed poetry )
 - python manage.py
 
-## Used Techs
+## Used Techs (Will be updated while development)
 - python 3.10.6
 - fastapi
 - mysql
