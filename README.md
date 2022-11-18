@@ -2,8 +2,12 @@
 This project developped according to lecture (ECC431 E-Commerce) requirements. A technical elective lecture given by [MSc. Buğra Demircioğlu](https://ziraat.neu.edu.tr/akademik-personel/bugra-demircioglu/).
 
 ## Diagrams for E-Commerce Project
-This is the concept diagram if we want to move the project to AWS.
+I like to implement projects according to the diagrams. Also i like design/implement diagrams for the software projects.
+ 
+### This is the concept diagram if we want to move the project to AWS.
+![AWSDiagram](./conceptAWS.png)
 
+### This is the concept diagram of project structure.
 ![Diagram](./conceptdiagram.svg)
 
 ## Pages (Will be developped)
