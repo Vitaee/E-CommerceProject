@@ -19,7 +19,7 @@ DATABASE = {
             "host" : config("DB_HOST", cast=str, default='172.17.0.3'),
             "database": config("DB_NAME", cast=str, default="ecommercedevdb"),
             "port": config("DB_PORT", cast=int, default=3306),
-            "user": config("DB_USER", cast="str", default="root"),
+            "user": config("DB_USER", cast=str, default="root"),
             "password": config("DB_PASSWORD", cast=str, default="123456") 
         },
     },
@@ -41,9 +41,6 @@ TORTOISE_ORM = {
     "use_tz": USE_TIMEZONE,
     "timezone": TIMEZONE
 }
-
-MEDIA_DIR = config("MEDIA_DIR", cast=str, default="media")
-MEDIA_URL = config("MEDIA_URL", cast=str, default="media")
 
 SECRET_KEY = config("SECRET_KEY", cast=str, default="mybest-secret-key")
 JWT_TOKEN_ALGORITHM = config("JWT_TOKEN_ALGORITHM", cast=str, default='HS256')
