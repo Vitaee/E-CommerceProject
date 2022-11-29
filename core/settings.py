@@ -67,9 +67,9 @@ MAIL_VALIDATE_CERTS = config('MAIL_VALIDATE_CERTS', cast=bool, default=False)
 
 # Celery and redis settings
 CELERY_BROKER_URL = config(
-    'CELERY_BROKER_URL', cast=str, default='redis://172.17.0.2:6379')
+    'CELERY_BROKER_URL', cast=str, default='redis://172.17.0.3:6379')
 CELERY_RESULT_BACKEND = config(
-    'CELERY_RESULT_BACKEND', cast=str, default='redis://172.17.0.2:6379')
+    'CELERY_RESULT_BACKEND', cast=str, default='redis://172.17.0.3:6379')
 CELERY_TASKS_REGISTER = [
     # ','.join(load_tasks()) # import automatically tasks
     ''

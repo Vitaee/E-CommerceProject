@@ -37,7 +37,7 @@ class InterceptHandler(logging.Handler):
 class CustomizeLogger:
 
     @classmethod
-    def make_logger(cls, config_path: Path) -> logging.Logger:
+    def make_logger(cls, config_path: Path):
         config = cls.load_logging_config(config_path)
         logging_config = config.get('logger')
 
@@ -51,7 +51,7 @@ class CustomizeLogger:
         return logger
     
     @classmethod
-    def customize_logging(cls,filepath: Path,level: str,rotation: str,retention: str,format: str ) -> logging.Logger:
+    def customize_logging(cls,filepath: Path,level: str,rotation: str,retention: str,format: str ):
 
         logger.remove()
         logger.add(
@@ -84,13 +84,13 @@ class CustomizeLogger:
 
 
     @classmethod
-    def load_logging_config(cls, config_path) -> None | Json:
+    def load_logging_config(cls, config_path):
         config = None
         with open(config_path) as config_file:
             config = json.load(config_file)
         return config
 
-def register_logs(app: FastAPI) -> logging.Logger:
+def register_logs(app: FastAPI):
     logger = logging.getLogger(__name__)
     logger = CustomizeLogger.make_logger(
         Path(__file__).parent.resolve() / "config.json")
