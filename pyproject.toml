@@ -20,6 +20,9 @@ tortoise-orm = "^0.19.2"
 httpx = "^0.23.0"
 Jinja2 = "^3.1.2"
 pytest-asyncio = "^0.20.2"
+jose = "^1.0.0"
+passlib = "^1.7.4"
+boto3 = "^1.26.16"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.0"
