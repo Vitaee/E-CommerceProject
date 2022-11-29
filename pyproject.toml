@@ -16,7 +16,7 @@ celery = "5.2.7"
 redis = "^4.3.4"
 PyYAML = "^6.0"
 aioredis = "^2.0.1"
-tortoise-orm = "^0.19.2"
+tortoise-orm = {extras = ["asyncmy"], version = "^0.19.2"}
 httpx = "^0.23.0"
 Jinja2 = "^3.1.2"
 pytest-asyncio = "^0.20.2"
@@ -24,11 +24,17 @@ jose = "^1.0.0"
 passlib = "^1.7.4"
 boto3 = "^1.26.16"
 loguru = "^0.6.0"
+aerich = "^0.7.1"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.0"
 flake8 = "^5.0.4"
 
+
+[tool.aerich]
+tortoise_orm = "core.settings.TORTOISE_ORM"
+location = "./database/migrations"
+src_folder = "./."
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

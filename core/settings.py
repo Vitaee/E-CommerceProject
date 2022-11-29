@@ -1,5 +1,6 @@
 from starlette.config import Config
 import os
+from core.utils import load_models
 
 config = Config('.env')
 
@@ -14,26 +15,26 @@ ALLOWED_HOSTS = ["http://localhost", "http://localhost:8080"]
 
 DATABASE = {
     "mysql" : {
-        "engine" : "tortoise.backends.asyncmy",
+        "engine" : "tortoise.backends.mysql",
         "credentials": {
-            "host" : config("DB_HOST", cast=str, default='172.17.0.3'),
+            "host" : config("DB_HOST", cast=str, default='172.17.0.2'),
             "database": config("DB_NAME", cast=str, default="ecommercedevdb"),
             "port": config("DB_PORT", cast=int, default=3306),
             "user": config("DB_USER", cast=str, default="root"),
             "password": config("DB_PASSWORD", cast=str, default="123456") 
         },
     },
-    "sqlite": "sqlite://db.sqlite3"
+    #"sqlite": "sqlite://db.sqlite3"
 }
 
 TORTOISE_ORM = {
     "connections" : {
-        "default" : DATABASE[config("DB_ENGINE", cast=str, default="sqlite")]
+        "default" : DATABASE[config("DB_ENGINE", cast=str, default="mysql")]
     },
 
     "apps": {
         "models":{
-            "models": [""],
+            "models": [*load_models(), "aerich.models"],
             "default_connection" : "default"
         }
     },

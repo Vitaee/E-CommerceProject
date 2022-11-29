@@ -2,7 +2,7 @@ from importlib import import_module
 import os
 from schemas.base import ValidationSchema
 
-def load_models(directory: str = 'models') -> list[str]:
+def load_models(directory: str = 'models'):
     files = ['{}.{}'.format(directory, x.name.split('.')[0]) for x in os.scandir(
         'models') if x.is_file() and x.name.endswith('.py')]
     return files
@@ -14,7 +14,7 @@ def format_validation_errors(errors):
     return err
 
 
-def load_signals() -> list[str]:
+def load_signals():
     files = ['signals.{}'.format(x.name.split('.')[0]) for x in os.scandir(
         'signals') if x.is_file() and x.name.endswith('.py')]
     return files
