@@ -24,7 +24,7 @@ async def get_database(connection: str = 'default') -> BaseDBAsyncClient:
 
 
 async def get_test_database() -> BaseDBAsyncClient:
-    await Tortoise.init(db_url='mysql://root:123456@172.17.0.2:3306/test',
+    await Tortoise.init(db_url='mysql://root:123456@172.17.0.3:3306/test',
                         modules={"models": TORTOISE_ORM["apps"]['models']['models']})
     await Tortoise.generate_schemas()
     return Tortoise.get_connection(connection_name='default')
