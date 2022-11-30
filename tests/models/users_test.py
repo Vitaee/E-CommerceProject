@@ -14,9 +14,15 @@ data = {
 async def test_create_user():
     user = await User.create(**data)
 
+    print(user)
+
     assert user.email == data['email']
 
     assert await User.filter(email=user.email).count() == 1
+
+import asyncio
+asyncio.run(test_create_user())
+
 
 @pytest.mark.asyncio
 async def test_update_user():

@@ -13,3 +13,10 @@ venv
 logs
 volumes
 ecommerce-env
+bin/
+bin
+build
+build/
+dist
+dist/
+packages.egg-info
