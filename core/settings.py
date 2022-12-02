@@ -56,7 +56,7 @@ AUTH_URL = config("AUTH_URL", cast=str, default="auth/login")
 
 MAIL_USERNAME = config('MAIL_USERNAME', cast=str, default='8504c1ffbcd79a')
 MAIL_PASSWORD = config('MAIL_PASSWORD', cast=str, default='d25828b56b032f')
-MAIL_FROM = config('MAIL_FROM', cast=str, default='canow712@gmail.com')
+MAIL_FROM = config('MAIL_FROM', cast=str, default='mygoogle@gmail.com')
 MAIL_PORT = config('MAIL_PORT', cast=int, default=2525)
 MAIL_SERVER = config('MAIL_SERVER', cast=str, default='smtp.mailtrap.io')
 MAIL_FROM_NAME = config('MAIL_FROM_NAME', cast=str,  default='FastAPI')

@@ -1,5 +1,5 @@
 from typing import Any, Dict, List
-from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from core import settings
 from pydantic import EmailStr
 
@@ -11,8 +11,8 @@ conf = ConnectionConfig(
     MAIL_PORT=settings.MAIL_PORT,
     MAIL_SERVER=settings.MAIL_SERVER,
     MAIL_FROM_NAME=settings.MAIL_FROM_NAME,
-    MAIL_TLS=settings.MAIL_USE_TLS,
-    MAIL_SSL=settings.MAIL_USE_SSL,
+    MAIL_SSL_TLS=settings.MAIL_USE_TLS,
+    MAIL_STARTTLS=settings.MAIL_USE_SSL,
     USE_CREDENTIALS=settings.MAIL_USE_CREDENTIALS,
     VALIDATE_CERTS=settings.MAIL_VALIDATE_CERTS,
     TEMPLATE_FOLDER='resources/'
@@ -24,6 +24,7 @@ async def send_email_async(subject: str, body: Dict[str, Any], to: List[EmailStr
         subject=subject,
         recipients=to,
         template_body=body,
+        subtype=MessageType.html
     )
     fm = FastMail(conf)
     await fm.send_message(message, template_name=template_name)
