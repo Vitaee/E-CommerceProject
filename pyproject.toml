@@ -28,6 +28,7 @@ aerich = "^0.7.1"
 fastapi-mail = "^1.2.2"
 python-jose = "^3.3.0"
 cryptography = "^38.0.4"
+uvicorn = "^0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.0"

@@ -15,7 +15,7 @@ def connect_db(app: FastAPI):
         generate_schemas=False,
         add_exception_handlers=True
     )
-    logger.info('Tortoise-ORM started', '{}'.format(Tortoise._connections), '{}'.format(Tortoise.apps))
+    logger.info('Tortoise-ORM started')
 
 
 async def get_database(connection: str = 'default') -> BaseDBAsyncClient:

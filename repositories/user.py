@@ -3,7 +3,7 @@ from models.users import User, VerifyCode
 from core.security import hash_password, create_access_token
 from core.exceptions import BadCredentialsError
 from database.helpers import authenticate
-from schemas import users as schemas
+from schemas import user as schemas
 
 
 class AuthRepository(BaseRepository):
