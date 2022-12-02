@@ -27,3 +27,15 @@ class User(models.Model):
 
     def __str__(self):
         return self.email
+
+class VerifyCode(models.Model):
+    id = fields.BigIntField(pk=True)
+    email = fields.CharField(max_length=255)
+    code = fields.CharField(max_length=255, unique=True)
+    created_at = fields.DatetimeField(auto_now_add=True)
+
+    class Meta:
+        table = 'verify_codes'
+
+    def __str__(self):
+        return f'{self.email}/{self.code}'

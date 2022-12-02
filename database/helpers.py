@@ -1,5 +1,5 @@
 from fastapi import Depends
-from models.users import User
+from models.users import User, VerifyCode
 from core.security import JWTBearer, verify_password, decode_token
 from jose import ExpiredSignatureError, JWTError
 from core.exceptions import (
@@ -37,3 +37,18 @@ async def get_current_user(token: str = Depends(JWTBearer())):
         raise TokenExpirateError("Token expired. Get new one")
     except JWTError:
         raise TokenInvalidError("Invalid Token")
+
+async def unique_code(as_token=True):
+    import random
+    import uuid
+    code = uuid.uuid1().hex if as_token else random.randint(209999, 999999)
+    is_exist = await VerifyCode.filter(code=code).count()
+    if is_exist > 0:
+        return await unique_code(as_token)
+    return code
+
+
+async def generate_verify_code(email: str, as_token=True):
+    code = await unique_code(as_token)
+    await VerifyCode.create(email=email, code=code)
+    return code
