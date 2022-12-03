@@ -1,12 +1,13 @@
 from tortoise.signals import pre_save, pre_delete, post_delete, post_save
 from typing import List, Optional, Type
 from tortoise import BaseDBAsyncClient
-from models.users import User
+from models.users import User, Role
 
 @pre_save(User)
 async def signal_pre_save(sender: "Type[User]", instance: User, using_db, update_fields):
     """might set default avatar from this signal"""
     print("signal pre save : ", sender, instance)
+
 
 
 @post_save(User)
@@ -17,9 +18,10 @@ async def signal_post_save(
     using_db: "Optional[BaseDBAsyncClient]",
     update_fields: List[str],
 ) -> None:
-    """might send welcome email from this signal"""
+    """ Setting up user's default role """
     print('message_post_save: ', sender, instance, using_db, update_fields)
-
+    user_role = await Role.filter(name="user").first()
+    await instance.roles.add(user_role)
 
 @pre_delete(User)
 async def signal_pre_delete(sender: "Type[User]", instance: User, using_db: "Optional[BaseDBAsyncClient]") -> None:

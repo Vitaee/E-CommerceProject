@@ -10,10 +10,11 @@ class User(models.Model):
     phone = fields.CharField(25, null=True)
     password = fields.CharField(255, null=True)
     avatar = fields.CharField(255, null=True)
-    #email_confirmed_at = fields.DatetimeField(null=True)
+    email_confirmed_at = fields.DatetimeField(null=True)
     created_at = fields.DatetimeField(auto_now_add=True, null=True)
     updated_at = fields.DatetimeField(auto_now=True, null=True)
-    #is_active = fields.BooleanField(default=True)
+    is_active = fields.BooleanField(default=True)
+    roles = fields.ManyToManyField('models.Role', related_name='users', through='user_roles')
 
     class Meta:
         table = 'users'
@@ -27,6 +28,18 @@ class User(models.Model):
 
     def __str__(self):
         return self.email
+
+class Role(models.Model):
+    id = fields.BigIntField(pk=True)
+    name = fields.CharField(max_length=25, unique=True)
+    created_at = fields.DatetimeField(auto_now_add=True)
+    updated_at = fields.DatetimeField(auto_now=True)
+
+    class Meta:
+        table = 'roles'
+
+    def __str__(self):
+        return self.name
 
 class VerifyCode(models.Model):
     id = fields.BigIntField(pk=True)

@@ -25,8 +25,6 @@ async def get_auth_user(user: schemas.UserSchema = Depends(get_current_user)):
     return user
 
 
-"""
 @router.post(path='/confirm', summary="Confirm email", response_model=schemas.UserSchema)
 async def confirm_email(credentials: schemas.ConfirmEmailSchema, repo: AuthRepository = Depends()):
     return await repo.confirm_email(**credentials.dict())
-"""

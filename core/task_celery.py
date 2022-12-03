@@ -1,9 +1,9 @@
 from .settings import CELERY_BROKER_URL, CELERY_RESULT_BACKEND, CELERY_TASKS_REGISTER
-import celery
 import time
+from celery import Celery
 
 
-celery = celery.Celery(__name__, include=CELERY_TASKS_REGISTER)
+celery = Celery(__name__, include=CELERY_TASKS_REGISTER)
 celery.conf.broker_url = CELERY_BROKER_URL
 celery.conf.result_backend = CELERY_RESULT_BACKEND
 
