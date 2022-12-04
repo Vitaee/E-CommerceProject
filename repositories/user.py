@@ -63,16 +63,20 @@ class UserRepository(Repository):
     model = User
 
     async def getAll(self, limit: int = 100, skip: int = 0):
-        pass
+        return await User.all().offset(skip).limit(limit)
 
-    async def findOne(self, *args, **kwargs):
-        pass
+    async def findOne(self, id: int):
+        return await User.filter(id=id).first()
 
     async def create(self, payload: dict):
-        pass
+        return await User.create(**payload)
 
     async def update(self, id: int, payload: dict):
-        pass
+        user = await User.find(id)
+        await user.update_from_dict(payload)
+        await user.save()
+        return user
+
 
     async def remove(self, id: int):
-        pass
+        return await User.find(id).delete()

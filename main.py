@@ -7,7 +7,7 @@ from core.exceptions import (
     UnAuthorizedError
 )
 from routes.base import router
-from database.base import connect_db
+from database.base import connect_db, Tortoise
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
@@ -25,12 +25,13 @@ async def on_start():
     logger.info('App is starting up..')
     register_cors(app)
     register_signals()
+    await connect_db(app)
 
 @app.on_event('shutdown')
 async def on_shotdown():
     logger.info('Shutting down the application..')
+    await Tortoise.close_connections()
 
-connect_db(app)
 
 app.include_router(router)
 
