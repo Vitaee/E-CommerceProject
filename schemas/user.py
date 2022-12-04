@@ -63,7 +63,7 @@ class LoginSchema(BaseModel):
 
 
 class RoleInSchema(BaseModel):
-    name: str = "user"
+    name: str
 
 
 class RoleSchema(BaseModel):

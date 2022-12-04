@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def connect_db(app: FastAPI):
+async def connect_db(app: FastAPI):
 
     register_tortoise(
         app,

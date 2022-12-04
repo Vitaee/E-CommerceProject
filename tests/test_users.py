@@ -12,16 +12,11 @@ data = {
     'password': '123456',
 }
 
-@pytest_asyncio.fixture(autouse=True)
-async def execute_before_tests():
-    await get_test_database()
-
 @pytest.mark.asyncio
 async def test_create_user():
-    await User.all().delete()
-    user = await User.create(**data)
+    await get_test_database()
 
-    print(user)
+    user = await User.create(**data)
 
     assert user.email == data['email']
 
