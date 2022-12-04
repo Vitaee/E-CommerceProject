@@ -24,22 +24,26 @@ category_data = {
 }
 
 
-
-#@pytest.mark.asyncio
 @pytest.mark.anyio
 async def test_create_product():
 
     await Product.all().delete()
+    await Business.all().delete()
+    await Category.all().delete()
 
     business = await Business.create(**business_data)
     category = await Category.create(**category_data)
 
+
     product = await Product.create(**product_data)
-    
     await product.business.add(business)
     await product.category.add(category)
-    await product.save()
 
+    product = await Product.filter(rating=3.9).first()
+
+    product_business = await product.business.all().first()
+
+    assert product_business.name == business_data["name"]
 
     assert product.title == product_data['title']
 

@@ -1,7 +1,5 @@
 import pytest
 from models.users import User
-from database.base import get_test_database
-import pytest_asyncio
 
 data = {
     'firstname': 'Can',
@@ -12,7 +10,6 @@ data = {
     'password': '123456',
 }
 
-#@pytest.mark.asyncio
 @pytest.mark.anyio
 async def test_create_user():
     await User.all().delete()
