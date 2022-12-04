@@ -12,9 +12,10 @@ data = {
     'password': '123456',
 }
 
-@pytest.mark.asyncio
+#@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_create_user():
-    await get_test_database()
+    await User.all().delete()
 
     user = await User.create(**data)
 

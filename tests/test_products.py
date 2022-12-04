@@ -11,8 +11,6 @@ product_data = {
     "images": ["https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"],
     "rating": 3.9,
     "count": 120,
-    "category": "Clothes",
-    "business": "TestCompany"
 }
 
 business_data = {
@@ -27,15 +25,16 @@ category_data = {
 
 
 
-@pytest.mark.asyncio
+#@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_create_product():
-    await get_test_database()
 
     await Product.all().delete()
-    product = await Product.create(**product_data)
 
     business = await Business.create(**business_data)
     category = await Category.create(**category_data)
+
+    product = await Product.create(**product_data)
     
     await product.business.add(business)
     await product.category.add(category)
