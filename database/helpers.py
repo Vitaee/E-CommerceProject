@@ -8,7 +8,7 @@ from core.exceptions import (
 )
 
 
-async def is_authenticated(username: str, password: str) -> bool | User:
+async def is_authenticated(username: str, password: str):
     user = await User.get_or_none(email=username)
     if not user:
         return False

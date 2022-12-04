@@ -17,7 +17,7 @@ class BaseRepository(ABC):
 class Repository(BaseRepository):
 
     @abstractmethod
-    async def getAll(limit: int = 100, skip: int = 0) -> list[BaseModel]:
+    async def getAll(limit: int = 100, skip: int = 0):
         pass
 
     @abstractmethod
@@ -25,11 +25,11 @@ class Repository(BaseRepository):
         pass
 
     @abstractmethod
-    async def create(*args, **kwargs) -> BaseModel:
+    async def create(*args, **kwargs):
         pass
 
     @abstractmethod
-    async def update(id: int, *args, **kwargs) -> BaseModel:
+    async def update(id: int, *args, **kwargs):
         pass
 
     @abstractmethod

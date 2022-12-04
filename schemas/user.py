@@ -60,3 +60,19 @@ class UserTokenSchema(UserSchema):
 class LoginSchema(BaseModel):
     password: str
     email: EmailStr
+
+
+class RoleInSchema(BaseModel):
+    name: str = "user"
+
+
+class RoleSchema(BaseModel):
+    id: int
+    name: str
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+
+
+class ConfirmEmailSchema(BaseModel):
+    code: str
+    email: EmailStr
