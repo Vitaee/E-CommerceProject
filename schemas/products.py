@@ -34,6 +34,8 @@ class ProductRegisterSchema(BaseModel):
     price: float
     description: str
     category: str
-    image: List[str]
+    images: List[str]
     business: str
+    count: int = 0
+    rating: float = 0.0
 
