@@ -1,7 +1,5 @@
 import pytest
 from models.users import User
-from database.base import get_test_database
-import pytest_asyncio
 
 data = {
     'firstname': 'Can',
@@ -12,16 +10,11 @@ data = {
     'password': '123456',
 }
 
-@pytest_asyncio.fixture(autouse=True)
-async def execute_before_tests():
-    await get_test_database()
-
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_create_user():
     await User.all().delete()
-    user = await User.create(**data)
 
-    print(user)
+    user = await User.create(**data)
 
     assert user.email == data['email']
 
