@@ -17,3 +17,7 @@ async def get_products(repo: ProductRepository = Depends()):
 async def get_product_by_name(title: str, repo: ProductRepository = Depends()):
     return await repo.findOne(title)
 
+@router.get(path='/category/{name}')
+async def get_product_by_category(name: str, repo: ProductRepository = Depends()):
+    return await repo.filter_by_category(name)
+

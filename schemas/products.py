@@ -5,7 +5,9 @@ from datetime import datetime
 class Category(BaseModel):
     id: int
     name: str
-    image: str
+
+class CategoryRegisterSchema(BaseModel):
+    name: str
 
 
 class Rating(BaseModel):
@@ -19,6 +21,11 @@ class Business(BaseModel):
     country = str
     image = str
 
+class BusinessRegisterSchema(BaseModel):
+    name: str
+    country: str
+    image: str
+    
 class Product(BaseModel):
     id: int
     title: str

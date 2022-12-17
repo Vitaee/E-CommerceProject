@@ -28,10 +28,19 @@ class ProductRepository(Repository):
     model = Product
 
     async def getAll(self, limit: int = 5, skip: int = 0):
+        d = await Product.get(title="Macbook Pro")
+        c = await d.category.all()
+        for i in c:
+            print("\n\n\n\n\n",i.name, "\n\n\n\n\n")
+
+            
         return await Product.all().offset(skip).limit(limit)
 
     async def findOne(self, title: str):
         return await Product.filter(title__contains=title).first()
+
+    async def filter_by_category(self, name: str):
+        return await Product.filter(category__name=name).first()
 
     async def create(self, payload: dict):
         return await Product.create(**payload)
