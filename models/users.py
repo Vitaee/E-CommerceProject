@@ -14,7 +14,7 @@ class User(models.Model):
     created_at = fields.DatetimeField(auto_now_add=True, null=True)
     updated_at = fields.DatetimeField(auto_now=True, null=True)
     is_active = fields.BooleanField(default=True)
-    roles = fields.ManyToManyField('models.Role', related_name='users', through='user_roles')
+    roles = fields.ForeignKeyField('models.Role', related_name='user_role')
 
     class Meta:
         table = 'users'

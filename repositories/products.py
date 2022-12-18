@@ -8,13 +8,13 @@ class SaveProductRepository(BaseRepository):
 
     model = Product
 
-    async def register(self, schema: schemas.ProductRegisterSchema):
+    async def register(self, schema: schemas.ProductRegisterSchema, user):
         """ Save product """
         get_category_obj = await Category.filter(name=schema.category).first()
-        get_business_obj = await Business.filter(name=schema.business).first()
+        get_business_obj = await Business.filter(business_owner__id=user.id).first()
         
 
-        product_obj = Product(**schema.dict(exclude={'category', 'business'}))
+        product_obj = Product(**schema.dict(exclude={'category'}))
         await product_obj.save()
         
         await product_obj.business.add(get_business_obj)
@@ -28,12 +28,6 @@ class ProductRepository(Repository):
     model = Product
 
     async def getAll(self, limit: int = 5, skip: int = 0):
-        d = await Product.get(title="Macbook Pro")
-        c = await d.category.all()
-        for i in c:
-            print("\n\n\n\n\n",i.name, "\n\n\n\n\n")
-
-            
         return await Product.all().offset(skip).limit(limit)
 
     async def findOne(self, title: str):

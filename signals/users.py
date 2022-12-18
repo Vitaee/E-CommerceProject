@@ -7,6 +7,8 @@ from models.users import User, Role
 async def signal_pre_save(sender: "Type[User]", instance: User, using_db, update_fields):
     """might set default avatar from this signal"""
     print("signal pre save : ", sender, instance)
+    user_role = await Role.filter(name="business_owner").first()
+    instance.roles = user_role
 
 
 
@@ -20,8 +22,6 @@ async def signal_post_save(
 ) -> None:
     """ Setting up user's default role """
     print('message_post_save: ', sender, instance, using_db, update_fields)
-    user_role = await Role.filter(name="user").first()
-    await instance.roles.add(user_role)
 
 @pre_delete(User)
 async def signal_pre_delete(sender: "Type[User]", instance: User, using_db: "Optional[BaseDBAsyncClient]") -> None:

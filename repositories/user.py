@@ -1,5 +1,5 @@
 from .base import BaseRepository, Repository
-from models.users import User, VerifyCode
+from models.users import User, VerifyCode, Role
 from core.security import hash_password, create_access_token
 from core.exceptions import (
     BadCredentialsError,

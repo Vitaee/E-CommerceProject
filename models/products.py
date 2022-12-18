@@ -1,6 +1,5 @@
 from tortoise import fields, models
 
-
 class Product(models.Model):
     id = fields.BigIntField(pk=True)
     title = fields.CharField(max_length=150, null=True)
@@ -31,6 +30,7 @@ class Business(models.Model):
     name = fields.CharField(max_length=100, null=True)
     country = fields.CharField(max_length=100, null=True)
     image = fields.TextField(null=True)
+    business_owner = fields.ForeignKeyField('models.User', related_name='business_owner', null=True, on_delete=fields.SET_NULL)
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
 
