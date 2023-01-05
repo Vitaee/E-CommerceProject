@@ -17,8 +17,8 @@ async def is_authenticated(username: str, password: str):
     return user
 
 
-async def authenticate(username: str, password: str) -> User:
-    user = await User.get_or_none(email=username)
+async def authenticate(email: str, password: str) -> User:
+    user = await User.get_or_none(email=email)
     if not user:
         raise BadCredentialsError('Email or password incorrect.')
     if not verify_password(password, user.password):
@@ -29,7 +29,7 @@ async def authenticate(username: str, password: str) -> User:
 async def get_current_user(token: str = Depends(JWTBearer())):
     try:
         decoded_token = decode_token(token)
-        user = await User.get_or_none(id=decoded_token.get('id'))
+        user = await User.get_or_none(username=decoded_token.get('username'))
         if not user:
             raise UnAuthorizedError("Invalid authentication credentials")
         return user

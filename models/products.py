@@ -1,3 +1,4 @@
+from unicodedata import category
 from tortoise import fields, models
 
 class Product(models.Model):
@@ -17,10 +18,17 @@ class Product(models.Model):
         table = 'products'
 
     class PydanticMeta:
-        computed = ["full_name"]
+        computed = ["get_all_business", "get_all_categories"]
 
-    def full_name(self) -> str:
-        return f"{self.business or ''} - {self.title or ''}"
+
+
+    async def get_all_business(self):
+        business = await self.business.all()
+        return  business[0].name
+
+    async def get_all_categories(self):
+        categories = await self.category.all()
+        return  categories[0].name
 
     def __str__(self):
         return self.title

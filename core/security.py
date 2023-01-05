@@ -29,8 +29,6 @@ def encode_token(data: dict) -> str:
 
 
 def create_access_token(user_obj: dict):
-    if 'password' in user_obj:
-        del user_obj['password']
     expire_at = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     token = encode_token(user_obj)
     user_obj['access_token'] = token

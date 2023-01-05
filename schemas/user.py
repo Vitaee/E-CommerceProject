@@ -41,17 +41,10 @@ class RegisterSchema(UserBaseSchema, PasswordSchema):
     pass
 
 
-class UserSchema(UserBaseSchema):
-    id: int
-    avatar: Optional[str]
-    created_at: datetime = None
-    modified_at: datetime = None
-
-    class Config:
-        orm_mode = True
 
 
-class UserTokenSchema(UserSchema):
+
+class UserTokenSchema(BaseModel):
     access_token: str
     token_type: Optional[str]
     token_expire_at: Optional[datetime]
@@ -76,3 +69,12 @@ class RoleSchema(BaseModel):
 class ConfirmEmailSchema(BaseModel):
     code: str
     email: EmailStr
+
+class UserSchema(UserBaseSchema):
+    id: int
+    avatar: Optional[str]
+    created_at: datetime = None
+    modified_at: datetime = None
+
+    class Config:
+        orm_mode = True

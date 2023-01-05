@@ -31,10 +31,10 @@ class Product(BaseModel):
     title: str
     price: int
     description: str
-    category: Category
+    #category: str
     images: List[str]
-    rating: Rating
-    business: Business
+    rating: float
+    #business: str
 
 class ProductRegisterSchema(BaseModel):
     title: str

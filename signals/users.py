@@ -5,9 +5,16 @@ from models.users import User, Role
 
 @pre_save(User)
 async def signal_pre_save(sender: "Type[User]", instance: User, using_db, update_fields):
-    """might set default avatar from this signal"""
+    """
+    - might set default avatar from this signal
+        
+        User Roles:
+            - user
+            - business
+            - admin
+    """
     print("signal pre save : ", sender, instance)
-    user_role = await Role.filter(name="business_owner").first()
+    user_role = await Role.filter(name="user").first()
     instance.roles = user_role
 
 

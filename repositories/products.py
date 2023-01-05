@@ -14,7 +14,7 @@ class SaveProductRepository(BaseRepository):
         get_business_obj = await Business.filter(business_owner__id=user.id).first()
         
 
-        product_obj = Product(**schema.dict(exclude={'category'}))
+        product_obj = self.model(**schema.dict(exclude={'category'}))
         await product_obj.save()
         
         await product_obj.business.add(get_business_obj)
@@ -28,22 +28,23 @@ class ProductRepository(Repository):
     model = Product
 
     async def getAll(self, limit: int = 5, skip: int = 0):
-        return await Product.all().offset(skip).limit(limit)
+        return await self.serializer.from_queryset(self.model.all().offset(skip).limit(0))
+        # await self.serializer.from_queryset(self.model.all().offset(skip).limit(limit))
 
     async def findOne(self, title: str):
-        return await Product.filter(title__contains=title).first()
+        return await self.model.filter(title__contains=title).first()
 
     async def filter_by_category(self, name: str):
-        return await Product.filter(category__name=name).first()
+        return await self.model.filter(category__name=name).first()
 
     async def create(self, payload: dict):
-        return await Product.create(**payload)
+        return await self.model.create(**payload)
 
     async def update(self, id: int, payload: dict):
-        product = await Product.find(id)
+        product = await self.model.find(id)
         await product.update_from_dict(payload)
         await product.save()
         return product
 
     async def remove(self, id: int):
-        return await Product.find(id).delete()
+        return await self.model.find(id).delete()

@@ -18,7 +18,7 @@ class AuthRepository(BaseRepository):
 
     async def register(self, schema: schemas.RegisterSchema) -> User:
         """ Registration user """
-        user_obj = User(**schema.dict(exclude={'password2'}))
+        user_obj = self.model(**schema.dict(exclude={'password2'}))
         user_obj.password = hash_password(user_obj.password)
         await user_obj.save()
         send_confirmation_email.delay(user_obj.email)
@@ -27,16 +27,12 @@ class AuthRepository(BaseRepository):
     async def login(self, schema: schemas.LoginSchema):
         """ Login user """
         user = await authenticate(
-            username=schema.email,
+            email=schema.email,
             password=schema.password,
         )
         if not user:
             raise BadCredentialsError('Email or password incorrect.')
-        return create_access_token({
-            'id': user.id,
-            'username': user.username,
-            'email': user.email,
-        })
+        return create_access_token({'username': user.username})
 
     async def confirm_email(self, schema: schemas.ConfirmEmailSchema) -> User:
         """ User email confirmation """
@@ -63,20 +59,20 @@ class UserRepository(Repository):
     model = User
 
     async def getAll(self, limit: int = 100, skip: int = 0):
-        return await User.all().offset(skip).limit(limit)
+        return await self.model.all().offset(skip).limit(limit)
 
     async def findOne(self, id: int):
-        return await User.filter(id=id).first()
+        return await self.model.filter(id=id).first()
 
     async def create(self, payload: dict):
-        return await User.create(**payload)
+        return await self.model.create(**payload)
 
     async def update(self, id: int, payload: dict):
-        user = await User.find(id)
+        user = await self.model.find(id)
         await user.update_from_dict(payload)
         await user.save()
         return user
 
 
     async def remove(self, id: int):
-        return await User.find(id).delete()
+        return await self.model.find(id).delete()

@@ -22,16 +22,16 @@ class BusinessRepository(Repository):
     model = Business
 
     async def getAll(self, limit: int = 5, skip: int = 0):
-        return await Business.all().offset(skip).limit(limit)
+        return await self.model.all().offset(skip).limit(limit)
 
     async def findOne(self, name: str):
-        return await Business.filter(name__contains=name).first()
+        return await self.model.filter(name__contains=name).first()
 
     async def create(self, payload: dict):
-        return await Business.create(**payload)
+        return await self.model.create(**payload)
 
     async def update(self, id: int, payload: dict):
         pass
 
     async def remove(self, id: int):
-        return await Business.find(id).delete()
+        return await self.model.find(id).delete()
