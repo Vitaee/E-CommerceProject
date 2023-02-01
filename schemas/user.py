@@ -58,6 +58,9 @@ class LoginSchema(BaseModel):
 class RoleInSchema(BaseModel):
     name: str
 
+class RoleInUpdateSchema(BaseModel):
+    old_role_name: str
+    new_role_name: str
 
 class RoleSchema(BaseModel):
     id: int
