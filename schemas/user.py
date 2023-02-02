@@ -10,7 +10,11 @@ class UserBaseSchema(BaseModel):
     email: EmailStr
     phone: Optional[str]
 
-
+class UserUpdateSchema(BaseModel):
+    username: str = None
+    avatar: str = None
+    
+    
 class PasswordSchema(BaseModel):
     password: str = Field(..., min_length=4, description='Password must be at least 4 characters')
     password2: str

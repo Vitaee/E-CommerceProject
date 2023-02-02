@@ -61,18 +61,18 @@ class UserRepository(Repository):
     async def getAll(self, limit: int = 100, skip: int = 0):
         return await self.model.all().offset(skip).limit(limit)
 
-    async def findOne(self, id: int):
-        return await self.model.filter(id=id).first()
+    async def findOne(self, username: str):
+        return await self.model.filter(username=username).first()
 
     async def create(self, payload: dict):
         return await self.model.create(**payload)
 
     async def update(self, id: int, payload: dict):
-        user = await self.model.find(id)
+        user = await self.model.get(id=id)
         await user.update_from_dict(payload)
         await user.save()
         return user
 
 
     async def remove(self, id: int):
-        return await self.model.find(id).delete()
+        return await self.model.get(id=id).delete()
