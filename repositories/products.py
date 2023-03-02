@@ -27,10 +27,6 @@ class ProductRepository(Repository):
 
     model = Product
 
-    async def getAll(self, limit: int = 5, skip: int = 0):
-        return await self.serializer.from_queryset(self.model.all().offset(skip).limit(0))
-        # await self.serializer.from_queryset(self.model.all().offset(skip).limit(limit))
-
     async def findOne(self, title: str):
         return await self.model.filter(title__contains=title).first()
 

@@ -58,9 +58,6 @@ class UserRepository(Repository):
 
     model = User
 
-    async def getAll(self, limit: int = 100, skip: int = 0):
-        return await self.model.all().offset(skip).limit(limit)
-
     async def findOne(self, username: str):
         return await self.model.filter(username=username).first()
 

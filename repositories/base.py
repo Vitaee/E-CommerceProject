@@ -16,22 +16,22 @@ class BaseRepository(ABC):
 
 class Repository(BaseRepository):
 
-    @abstractmethod
-    async def getAll(limit: int = 100, skip: int = 0):
-        pass
+    @classmethod
+    async def getAll(self, limit: int = 100, skip: int = 0):
+        return await self.model.all().offset(skip).limit(limit)
 
     @abstractmethod
     async def findOne(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    async def create(*args, **kwargs):
+    async def create(self, **payload):
+        return await self.model.create(**payload)
+
+    @abstractmethod
+    async def update(self, id: int, *args, **kwargs):
         pass
 
     @abstractmethod
-    async def update(id: int, *args, **kwargs):
-        pass
-
-    @abstractmethod
-    async def remove(id: int):
+    async def remove(self, id: int):
         pass

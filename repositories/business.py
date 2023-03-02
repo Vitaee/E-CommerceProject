@@ -21,9 +21,6 @@ class BusinessRepository(Repository):
 
     model = Business
 
-    async def getAll(self, limit: int = 5, skip: int = 0):
-        return await self.model.all().offset(skip).limit(limit)
-
     async def findOne(self, name: str):
         return await self.model.filter(name__contains=name).first()
 

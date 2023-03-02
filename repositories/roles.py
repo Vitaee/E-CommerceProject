@@ -17,9 +17,6 @@ class RoleRepository(Repository):
 
     model = Role
 
-    async def getAll(self, limit: int = 100, skip: int = 0):
-        return await self.model.all().offset(skip).limit(limit)
-
     async def findOne(self, name: str):
         return await self.model.filter(name=name).first()
 

@@ -20,9 +20,6 @@ class CategoryRepository(Repository):
 
     model = Category
 
-    async def getAll(self, limit: int = 5, skip: int = 0):
-        return await Category.all().offset(skip).limit(limit)
-
     async def findOne(self, name: str):
         return await Category.filter(name__contains=name).first()
 
