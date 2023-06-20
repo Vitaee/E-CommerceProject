@@ -32,4 +32,4 @@ async def update_role(credentials: user.RoleInUpdateSchema, repo: RoleRepository
 @router.delete(path='/')
 async def delete_role(credentials: user.RoleInSchema, repo: RoleRepository = Depends()):
     "Delete a role"
-    return await repo.remove(credentials.name)
+    return await repo.remove(credentials.id)

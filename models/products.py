@@ -3,7 +3,7 @@ from tortoise import fields, models
 
 class Product(models.Model):
     id = fields.BigIntField(pk=True)
-    title = fields.CharField(max_length=150, null=True)
+    name = fields.CharField(max_length=150, null=True)
     description = fields.TextField(null=True)
     price = fields.FloatField(null=True)
     images = fields.JSONField(null=True)

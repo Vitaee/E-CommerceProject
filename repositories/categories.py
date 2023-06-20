@@ -20,9 +20,6 @@ class CategoryRepository(Repository):
 
     model = Category
 
-    async def findOne(self, name: str):
-        return await Category.filter(name__contains=name).first()
-
     async def create(self, payload: dict):
         return await Category.create(**payload)
 

@@ -17,7 +17,7 @@ DATABASE = {
     "mysql" : {
         "engine" : "tortoise.backends.mysql",
         "credentials": {
-            "host" : config("DB_HOST", cast=str, default='172.17.0.3'),
+            "host" : config("DB_HOST", cast=str, default='172.17.0.2'),
             "database": config("DB_NAME", cast=str, default="ecommercedevdb"),
             "port": config("DB_PORT", cast=int, default=3306),
             "user": config("DB_USER", cast=str, default="root"),

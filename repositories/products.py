@@ -27,20 +27,5 @@ class ProductRepository(Repository):
 
     model = Product
 
-    async def findOne(self, title: str):
-        return await self.model.filter(title__contains=title).first()
-
     async def filter_by_category(self, name: str):
         return await self.model.filter(category__name=name).first()
-
-    async def create(self, payload: dict):
-        return await self.model.create(**payload)
-
-    async def update(self, id: int, payload: dict):
-        product = await self.model.find(id)
-        await product.update_from_dict(payload)
-        await product.save()
-        return product
-
-    async def remove(self, id: int):
-        return await self.model.find(id).delete()

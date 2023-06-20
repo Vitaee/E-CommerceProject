@@ -64,17 +64,17 @@ CREATE TABLE IF NOT EXISTS `aerich` (
     `app` VARCHAR(100) NOT NULL,
     `content` JSON NOT NULL
 ) CHARACTER SET utf8mb4;
-CREATE TABLE IF NOT EXISTS `product_category` (
-    `products_id` BIGINT NOT NULL,
-    `category_id` BIGINT NOT NULL,
-    FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE
-) CHARACTER SET utf8mb4;
 CREATE TABLE IF NOT EXISTS `products_owner` (
     `products_id` BIGINT NOT NULL,
     `business_id` BIGINT NOT NULL,
     FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
     FOREIGN KEY (`business_id`) REFERENCES `business` (`id`) ON DELETE CASCADE
+) CHARACTER SET utf8mb4;
+CREATE TABLE IF NOT EXISTS `product_category` (
+    `products_id` BIGINT NOT NULL,
+    `category_id` BIGINT NOT NULL,
+    FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE
 ) CHARACTER SET utf8mb4;"""
 
 

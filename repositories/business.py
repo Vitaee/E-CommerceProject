@@ -20,15 +20,3 @@ class SaveBusinessRepository(BaseRepository):
 class BusinessRepository(Repository):
 
     model = Business
-
-    async def findOne(self, name: str):
-        return await self.model.filter(name__contains=name).first()
-
-    async def create(self, payload: dict):
-        return await self.model.create(**payload)
-
-    async def update(self, id: int, payload: dict):
-        pass
-
-    async def remove(self, id: int):
-        return await self.model.find(id).delete()
